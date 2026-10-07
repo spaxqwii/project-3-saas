@@ -21,17 +21,17 @@ resource "aws_db_instance" "postgres" {
   engine         = "postgres"
   engine_version = "15"
   instance_class = "db.t3.micro"
-  
+
   allocated_storage = 20
-  
+
   db_name  = "saas_db"
   username = "devuser"
   password = var.db_password
-  
-  publicly_accessible = true
-  skip_final_snapshot = true
+
+  publicly_accessible    = true
+  skip_final_snapshot    = true
   vpc_security_group_ids = [aws_security_group.rds.id]
-  
+
   tags = {
     Name = "project-3-saas-db"
   }
@@ -45,3 +45,18 @@ variable "db_password" {
 output "rds_endpoint" {
   value = aws_db_instance.postgres.endpoint
 }
+
+# ECR Repository
+resource "aws_ecr_repository" "backend" {
+  name                 = "project-3-saas-backend"
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = false
+  }
+}
+
+output "ecr_repository_url" {
+  value = aws_ecr_repository.backend.repository_url
+}
+
