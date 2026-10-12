@@ -7,7 +7,7 @@ on:
 jobs:
   test-backend:
     runs-on: ubuntu-latest
-
+    
     services:
       postgres:
         image: postgres:15
@@ -36,7 +36,7 @@ jobs:
           cd backend
           python -m pip install -r requirements.txt
           pip install pytest httpx
-
+      
       - name: Run migrations
         env:
           DATABASE_URL: postgresql://devuser:testpass123@localhost:5432/saas_db
@@ -45,6 +45,8 @@ jobs:
           alembic upgrade head
       
       - name: Run backend tests
+        env:
+          DATABASE_URL: postgresql://devuser:testpass123@localhost:5432/saas_db
         run: |
           cd backend
           pytest test_api.py -v
@@ -87,6 +89,5 @@ jobs:
       - name: Deployment ready
         run: |
           echo "✅ All tests passed"
-          echo "✅ Backend and frontend built successfully"
-          echo "Ready for AWS deployment"
-          echo "Next: Deploy backend to AWS App Runner with DATABASE_URL from secrets"
+          echo "✅ Backend built successfully"
+          echo "✅ Frontend built successfully"
