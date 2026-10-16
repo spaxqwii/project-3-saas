@@ -11,7 +11,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault()
     try {
-      const res = await axios.post('http://localhost:8000/login', { email, password })
+      const res = await axios.post('/api/login', { email, password })
       localStorage.setItem('token', res.data.access_token)
       navigate('/tasks')
     } catch (err) {

@@ -12,7 +12,7 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault()
     try {
-      await axios.post('http://localhost:8000/register', { email, username, password })
+      await axios.post('/api/register', { email, username, password })
       navigate('/login')
     } catch (err) {
       setError('Registration failed')
