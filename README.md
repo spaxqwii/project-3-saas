@@ -62,7 +62,11 @@ pytest test_api.py -v
 ✅ Secrets management (Kubernetes secrets, GitHub secrets)
 ✅ Automated testing (pytest, GitHub Actions)
 ✅ Infrastructure as Code (Terraform)
-✅ No hardcoded credentials
+
+## Known gaps (learning build, not production)
+- JWT SECRET_KEY is hardcoded in backend/app/main.py
+- Passwords are stored in plaintext (no hashing yet)
+- Database password "devpassword" appears in k3d manifests
 
 ## CI/CD Pipeline
 
