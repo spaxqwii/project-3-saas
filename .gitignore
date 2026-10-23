@@ -3,3 +3,13 @@
 venv/
 secrets.env
 .terraform/
+# Terraform state (contains secrets in plaintext)
+*.tfstate
+*.tfstate.*
+
+# Frontend and Python build output
+node_modules/
+frontend/build/
+__pycache__/
+*.pyc
+.pytest_cache/ls
